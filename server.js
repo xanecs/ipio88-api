@@ -3,18 +3,39 @@ var express = require('express');
 var log = require('npmlog');
 var bodyParser = require('body-parser');
 var async = require('async');
+var fs = require('fs');
+var basicAuth = require('basic-auth');
+
+var config = require(fs.existsSync('./config/config.js') ? './config/config.js' : './config/config.default.js');
 
 var app = express();
 app.use(bodyParser.json());
 var router = express.Router();
 
-var board = new ipio.IPIO({
-  host: "10.0.0.21",
-  username: "admin",
-  password: ""
-}, function () {
-  app.listen(2000, function () {
-    log.info('http', 'Server listening on port 2000');
+var auth = function (req, res, next) {
+  function unauthorized(res) {
+    res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
+    return res.sendStatus(401);
+  }
+
+  var user = basicAuth(req);
+
+  if (!user || !user.name || !user.pass) {
+    return unauthorized(res);
+  }
+
+  if (user.name === config.api.authentication.username && user.pass === config.api.authentication.password) {
+    return next();
+  } else {
+    return unauthorized(res);
+  }
+};
+
+router.use(auth);
+
+var board = new ipio.IPIO(config.device, function () {
+  app.listen(config.api.port, function () {
+    log.info('http', 'Server listening on port ' + config.api.port);
   });
 });
 
