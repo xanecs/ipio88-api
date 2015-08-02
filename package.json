@@ -1,0 +1,18 @@
+{
+  "name": "ipio88",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Leon Bentrup <leon@leonadi.de>",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "async": "^1.4.0",
+    "body-parser": "^1.13.3",
+    "express": "^4.13.2",
+    "npmlog": "^1.2.1",
+    "telnet-stream": "0.0.4"
+  }
+}
