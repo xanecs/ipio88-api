@@ -65,4 +65,10 @@ router.get('/outputs', function (req, res, next) {
   });
 });
 
+router.post('/schedule', function (req, res, next) {
+  board.schedule(req.body, function () {
+    res.send({result: "ok"});
+  });
+})
+
 app.use('/api', router);
