@@ -12,6 +12,7 @@
     "async": "^1.4.0",
     "basic-auth": "^1.0.3",
     "body-parser": "^1.13.3",
+    "cors": "^2.7.1",
     "express": "^4.13.2",
     "npmlog": "^1.2.1",
     "telnet-stream": "0.0.4"

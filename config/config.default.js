@@ -1,6 +1,7 @@
 module.exports = {
   device: {
-    host: "10.0.0.2",
+    host: "127.0.0.1",
+    port: 2323,
     username: "admin",
     password: ""
   },

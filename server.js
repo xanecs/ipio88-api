@@ -5,11 +5,13 @@ var bodyParser = require('body-parser');
 var async = require('async');
 var fs = require('fs');
 var basicAuth = require('basic-auth');
+var cors = require('cors');
 
 var config = require(fs.existsSync('./config/config.js') ? './config/config.js' : './config/config.default.js');
 
 var app = express();
 app.use(bodyParser.json());
+app.use(cors());
 var router = express.Router();
 
 var auth = function (req, res, next) {
